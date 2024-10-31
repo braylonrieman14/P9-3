@@ -18,25 +18,32 @@ bool hasRun(int values[], int size);
 
 int main(void)
 {
+	//variables
+	bool checksRun = false;
+	const int size = 20;
+	int values[size];
+	
 	//seeds rand
 	srand(time(0));
 
-	//variables
-	const int size = 20;
-	int values[size];
+	while (checksRun == false)
+	{
+		//fills the array
+		for (int i = 0; i < size; i++)
+			values[i] = rand() % 6 + 1;
 
-	//fills the array
-	for (int i = 0; i < size; i++)
-		values[i] = rand() % 6 + 1;
+		//displays any runs
+		displayRun(values, size);
 
-	//displays any runs
-	displayRun(values, size);
-
-	//displays if there is any runs
-	if (hasRun)
-		cout << "\nThere are runs in the rolls.";
-	else
-		cout << "\nThere are no runs in the rolls.";
+		//displays if there is any runs
+		if (hasRun(values, size) == true)
+		{
+			cout << "\nThere are runs in the rolls.";
+			checksRun = true;
+		}
+		else
+			cout << "\nThere are no runs in the rolls.";
+	}
 }
 
 void displayRun(int values[], int size)
@@ -45,10 +52,23 @@ void displayRun(int values[], int size)
 	{
 		if (values[i] == values[i + 1])
 		{
-			cout << "(" << values[i] << " " << values[i++] << ") ";
+			cout << "(" << values[i];
+			for (int j = i + 1; j <= size; j++)
+			{
+				if (values[j] == values[i])
+					cout << " " << values[j];
+				else
+				{
+					cout << ") ";
+					i += j - i - 1;
+					break;
+				}
+			}
 		}
 		else
+		{
 			cout << values[i] << " ";
+		}
 	}
 }
 
