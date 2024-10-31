@@ -13,6 +13,8 @@ using namespace std;
 
 //function prototypes
 void displayRun(int values[], int size);
+bool hasRun(int values[], int size);
+
 
 int main(void)
 {
@@ -29,6 +31,12 @@ int main(void)
 
 	//displays any runs
 	displayRun(values, size);
+
+	//displays if there is any runs
+	if (hasRun)
+		cout << "\nThere are runs in the rolls.";
+	else
+		cout << "\nThere are no runs in the rolls.";
 }
 
 void displayRun(int values[], int size)
@@ -42,4 +50,16 @@ void displayRun(int values[], int size)
 		else
 			cout << values[i] << " ";
 	}
+}
+
+bool hasRun(int values[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (values[i] == values[i + 1])
+		{
+			return(true);
+		}
+	}
+	return(false);
 }
